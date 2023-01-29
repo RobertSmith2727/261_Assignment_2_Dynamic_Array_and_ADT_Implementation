@@ -22,14 +22,15 @@ class DynamicArray:
         Initialize new dynamic array
         DO NOT CHANGE THIS METHOD IN ANY WAY
         """
+        self.data = None
         self._size = 0
         self._capacity = 4
         self._data = StaticArray(self._capacity)
         # populate dynamic array with initial values (if provided)
         # before using this feature, implement append() method
-        # if start_array is not None:
-        #     for value in start_array:
-        #         self.append(value)
+        if start_array is not None:
+            for value in start_array:
+                self.append(value)
 
     def __str__(self) -> str:
         """
@@ -132,20 +133,25 @@ class DynamicArray:
         """
         TODO: Write this implementation
         """
-        if new_capacity <= 0 or new_capacity <= DynamicArray.length(self):
-            return DynamicArray()
+        if new_capacity <= 0 or new_capacity <= DynamicArray.get_capacity(self):
+            return None
+
         self._capacity = new_capacity
+        temp_arr = self._data
         self._data = StaticArray(self._capacity)
+        for item in range(DynamicArray.length(self)):
+            self._data[item] = temp_arr.get(item)
 
     def append(self, value: object) -> None:
         """
         TODO: Write this implementation
         """
-        new_capacity = DynamicArray.get_capacity(self) * 2
-        temp_arr = DynamicArray(self)
-        if DynamicArray.length(self) + 1 > DynamicArray.get_capacity(self):
+
+        if self._data.get(self._data.length() - 1) is not None:
+            new_capacity = self._capacity * 2
             self.resize(new_capacity)
-        if DynamicArray.length(self) + 1 <= DynamicArray.get_capacity(self):
+
+        if self._data.get(self._data.length() - 1) is None:
             self._data[self._size] = value
             self._size = self._size + 1
 
