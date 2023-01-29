@@ -134,8 +134,9 @@ class DynamicArray:
         TODO: Write this implementation
         """
         #
-        if new_capacity <= 0 or new_capacity <= DynamicArray.get_capacity(self):
-            pass
+        # if new_capacity <= 0 or new_capacity <= DynamicArray.get_capacity(self):
+        if new_capacity <= 0 or new_capacity < self._size:
+            return
         else:
             self._capacity = new_capacity
             temp_arr = self._data
