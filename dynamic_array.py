@@ -133,24 +133,26 @@ class DynamicArray:
         """
         TODO: Write this implementation
         """
+        #
         if new_capacity <= 0 or new_capacity <= DynamicArray.get_capacity(self):
-            return None
-
-        self._capacity = new_capacity
-        temp_arr = self._data
-        self._data = StaticArray(self._capacity)
-        for item in range(DynamicArray.length(self)):
-            self._data[item] = temp_arr.get(item)
+            pass
+        else:
+            self._capacity = new_capacity
+            temp_arr = self._data
+            self._data = StaticArray(self._capacity)
+            for item in range(DynamicArray.length(self)):
+                self._data[item] = temp_arr.get(item)
 
     def append(self, value: object) -> None:
         """
         TODO: Write this implementation
         """
-
+        # if there is no room in da
         if self._data.get(self._data.length() - 1) is not None:
             new_capacity = self._capacity * 2
             self.resize(new_capacity)
 
+        # if there is room in da
         if self._data.get(self._data.length() - 1) is None:
             self._data[self._size] = value
             self._size = self._size + 1
