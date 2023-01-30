@@ -163,18 +163,20 @@ class DynamicArray:
         TODO: Write this implementation
         """
 
-        if self.length() < index < 0:
+        if index < 0 or index > self.length():
             raise DynamicArrayException
+        if self._data[0] is None:
+            self.append(value)
+            return
 
         # appends val then shifts to index
         self.append(value)
         da_index = self._data.length() - 1
         while da_index != index:
-            if self._data[da_index] is None:
-                da_index -= 1
             if self._data[da_index] is not None:
-
                 self._data[da_index], self._data[da_index - 1] = self._data[da_index - 1], self._data[da_index]
+                da_index -= 1
+            if self._data[da_index] is None:
                 da_index -= 1
 
     def remove_at_index(self, index: int) -> None:
@@ -258,29 +260,29 @@ if __name__ == "__main__":
         da.append(i)
     print(da.length())
     print(da.get_capacity())
-    print("\n# insert_at_index - example 1")
-    da = DynamicArray([100])
-    print(da)
-    da.insert_at_index(0, 200)
-    da.insert_at_index(0, 300)
-    da.insert_at_index(0, 400)
-    print(da)
-    da.insert_at_index(3, 500)
-    print(da)
-    da.insert_at_index(1, 600)
-    print(da)
-    print("\n# insert_at_index example 2")
-    da = DynamicArray()
-    try:
-        da.insert_at_index(-1, 100)
-    except Exception as e:
-        print("Exception raised:", type(e))
-    da.insert_at_index(0, 200)
-    try:
-        da.insert_at_index(2, 300)
-    except Exception as e:
-        print("Exception raised:", type(e))
-    print(da)
+    # print("\n# insert_at_index - example 1")
+    # da = DynamicArray([100])
+    # print(da)
+    # da.insert_at_index(0, 200)
+    # da.insert_at_index(0, 300)
+    # da.insert_at_index(0, 400)
+    # print(da)
+    # da.insert_at_index(3, 500)
+    # print(da)
+    # da.insert_at_index(1, 600)
+    # print(da)
+    # print("\n# insert_at_index example 2")
+    # da = DynamicArray()
+    # try:
+    #     da.insert_at_index(-1, 100)
+    # except Exception as e:
+    #     print("Exception raised:", type(e))
+    # da.insert_at_index(0, 200)
+    # try:
+    #     da.insert_at_index(2, 300)
+    # except Exception as e:
+    #     print("Exception raised:", type(e))
+    # print(da)
     print("\n# insert at index example 3")
     da = DynamicArray()
     for i in range(1, 10):
