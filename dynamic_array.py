@@ -161,6 +161,7 @@ class DynamicArray:
     def insert_at_index(self, index: int, value: object) -> None:
         """
         TODO: Write this implementation
+        TODO test if it will insert at index 3 if index 2 and 3 are none
         """
 
         if index < 0 or index > self.length():
@@ -183,7 +184,15 @@ class DynamicArray:
         """
         TODO: Write this implementation
         """
-        pass
+
+
+        da_index = index
+        while da_index != self._data.length() - 1:
+            self.set_at_index(da_index, self.get_at_index(da_index + 1))
+            da_index += 1
+            if da_index == self._data.length() - 1:
+                self.set_at_index(da_index, None)
+
 
     def slice(self, start_index: int, size: int) -> "DynamicArray":
         """
