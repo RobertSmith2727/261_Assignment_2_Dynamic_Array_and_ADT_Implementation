@@ -162,7 +162,20 @@ class DynamicArray:
         """
         TODO: Write this implementation
         """
-        pass
+
+        if self.length() < index < 0:
+            raise DynamicArrayException
+
+        # appends val then shifts to index
+        self.append(value)
+        da_index = self._data.length() - 1
+        while da_index != index:
+            if self._data[da_index] is None:
+                da_index -= 1
+            if self._data[da_index] is not None:
+
+                self._data[da_index], self._data[da_index - 1] = self._data[da_index - 1], self._data[da_index]
+                da_index -= 1
 
     def remove_at_index(self, index: int) -> None:
         """
