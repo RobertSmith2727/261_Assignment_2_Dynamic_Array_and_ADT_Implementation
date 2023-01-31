@@ -230,7 +230,7 @@ class DynamicArray:
         new_arr = DynamicArray()
 
         # invalid index
-        if start_index < 0 or start_index > self.length():
+        if start_index < 0 or start_index >= self.length():
             raise DynamicArrayException
 
         # negative size
