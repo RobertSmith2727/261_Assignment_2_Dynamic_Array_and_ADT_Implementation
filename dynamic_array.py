@@ -184,7 +184,7 @@ class DynamicArray:
         """
         TODO: Write this implementation
         """
-        if self.length() * 2 < 10:
+        if self.length() * 2 < 10 and self.length() > 10:
             if self._size / self._capacity < 0.25:
                 self.resize(10)
         if self.length() * 2 > 10:
