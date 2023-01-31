@@ -147,6 +147,7 @@ class DynamicArray:
     def append(self, value: object) -> None:
         """
         TODO: Write this implementation
+        TODO rewrite if time
         """
         # if there is no room in da
         if self._data.get(self._data.length() - 1) is not None:
@@ -162,6 +163,7 @@ class DynamicArray:
         """
         TODO: Write this implementation
         TODO test if it will insert at index 3 if index 2 and 3 are none
+        TODO rewrite if time
         """
 
         if index < 0 or index > self.length():
@@ -184,13 +186,20 @@ class DynamicArray:
         """
         TODO: Write this implementation
         """
+        # invalid index
         if index < 0 or index > self.length():
             raise DynamicArrayException
+
+        # empty array
         if self._size == 0:
             raise DynamicArrayException
+
+        # resize to 10
         if self.length() * 2 < 10 and self.get_capacity() > 10:
             if self.length() / self.get_capacity() < 0.25:
                 self.resize(10)
+
+        # resize to twice the size of length
         if self.length() * 2 > 10:
             if self.length() / self.get_capacity() < 0.25:
                 new_capacity = self.length() * 2
@@ -217,7 +226,31 @@ class DynamicArray:
         """
         TODO: Write this implementation
         """
-        pass
+
+        new_arr = DynamicArray()
+
+        # invalid index
+        if start_index < 0 or start_index > self.length():
+            raise DynamicArrayException
+
+        # negative size
+        if size < 0:
+            raise DynamicArrayException
+
+        # not enough indices
+        if start_index + size > self.length():
+            raise DynamicArrayException
+
+        if size == 0:
+            return new_arr
+
+        index = start_index
+        stop_index = start_index + size
+        while index != stop_index:
+            value = self.get_at_index(index)
+            new_arr.append(value)
+            index += 1
+        return new_arr
 
     def merge(self, second_da: "DynamicArray") -> None:
         """
@@ -320,41 +353,25 @@ if __name__ == "__main__":
         except Exception as e:
             print("Cannot insert value", value, "at index", index)
     print(da)
+
     print("\n# remove_at_index - example 1")
-    da = DynamicArray([15, 16, 1024,1,1,1,1,1,1])
+    da = DynamicArray([10, 20, 30, 40, 50, 60, 70, 80])
     print(da)
     da.remove_at_index(0)
     print(da)
-    da.remove_at_index(0)
+    da.remove_at_index(6)
     print(da)
-    da.remove_at_index(0)
+    da.remove_at_index(2)
     print(da)
-    da.remove_at_index(0)
+    print("\n# remove_at_index - example 2")
+    da = DynamicArray([1024])
     print(da)
-    da.remove_at_index(0)
+    for i in range(17):
+        da.insert_at_index(i, i)
+    print(da.length(), da.get_capacity())
+    for i in range(16, -1, -1):
+        da.remove_at_index(0)
     print(da)
-    da.remove_at_index(0)
-    print(da)
-    da.remove_at_index(0)
-    print(da)
-    # print("\n# remove_at_index - example 1")
-    # da = DynamicArray([10, 20, 30, 40, 50, 60, 70, 80])
-    # print(da)
-    # da.remove_at_index(0)
-    # print(da)
-    # da.remove_at_index(6)
-    # print(da)
-    # da.remove_at_index(2)
-    # print(da)
-    # print("\n# remove_at_index - example 2")
-    # da = DynamicArray([1024])
-    # print(da)
-    # for i in range(17):
-    #     da.insert_at_index(i, i)
-    # print(da.length(), da.get_capacity())
-    # for i in range(16, -1, -1):
-    #     da.remove_at_index(0)
-    # print(da)
     print("\n# remove_at_index - example 3")
     da = DynamicArray()
     print(da.length(), da.get_capacity())
@@ -382,12 +399,12 @@ if __name__ == "__main__":
     for _ in range(5):
         da.remove_at_index(0)
         print(da)
-    print("\n# slice example 1")
-    da = DynamicArray([1, 2, 3, 4, 5, 6, 7, 8, 9])
-    da_slice = da.slice(1, 3)
-    print(da, da_slice, sep="\n")
-    da_slice.remove_at_index(0)
-    print(da, da_slice, sep="\n")
+    # print("\n# slice example 1")
+    # da = DynamicArray([1, 2, 3, 4, 5, 6, 7, 8, 9])
+    # da_slice = da.slice(1, 3)
+    # print(da, da_slice, sep="\n")
+    # da_slice.remove_at_index(0)
+    # print(da, da_slice, sep="\n")
     print("\n# slice example 2")
     da = DynamicArray([10, 11, 12, 13, 14, 15, 16])
     print("SOURCE:", da)
