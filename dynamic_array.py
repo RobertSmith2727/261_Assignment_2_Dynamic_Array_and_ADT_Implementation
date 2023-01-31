@@ -187,7 +187,7 @@ class DynamicArray:
         if index < 0 or index > self.length():
             raise DynamicArrayException
         if self._size == 0:
-            return
+            raise DynamicArrayException
         if self.length() * 2 < 10 and self.get_capacity() > 10:
             if self.length() / self.get_capacity() < 0.25:
                 self.resize(10)
