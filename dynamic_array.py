@@ -184,16 +184,18 @@ class DynamicArray:
         """
         TODO: Write this implementation
         """
-        if self.length() * 2 < 10 and self.length() > 10:
-            if self._size / self._capacity < 0.25:
+        if index < 0:
+            return
+        if self._size == 0:
+            return
+        if self.length() * 2 < 10 and self.get_capacity() > 10:
+            if self.length() / self.get_capacity() < 0.25:
                 self.resize(10)
         if self.length() * 2 > 10:
-            if self._size / self._capacity < 0.25:
+            if self.length() / self.get_capacity() < 0.25:
                 new_capacity = self.length() * 2
                 self.resize(new_capacity)
-        # if self._size / self._capacity < 0.25:
-        #     new_capacity = self.length() * 2
-        #     self.resize(new_capacity)
+
         da_index = index
         # if last index
         if self._size - 1 == index:
@@ -317,6 +319,23 @@ if __name__ == "__main__":
             da.insert_at_index(index, value)
         except Exception as e:
             print("Cannot insert value", value, "at index", index)
+    print(da)
+    print("\n# remove_at_index - example 1")
+    da = DynamicArray([15, 16, 1024,1,1,1,1,1,1])
+    print(da)
+    da.remove_at_index(0)
+    print(da)
+    da.remove_at_index(0)
+    print(da)
+    da.remove_at_index(0)
+    print(da)
+    da.remove_at_index(0)
+    print(da)
+    da.remove_at_index(0)
+    print(da)
+    da.remove_at_index(0)
+    print(da)
+    da.remove_at_index(0)
     print(da)
     # print("\n# remove_at_index - example 1")
     # da = DynamicArray([10, 20, 30, 40, 50, 60, 70, 80])
