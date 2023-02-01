@@ -101,9 +101,9 @@ class Bag:
         """
         try:
             value = self._da[self._index]
-        # except self._index < 0 or self._index >= self.size():
-        except index < 0 or index >= self.size():
-            raise DynamicArrayException
+        except DynamicArrayException:
+        # except index < 0 or index >= self.size():
+            raise StopIteration
 
         self._index = self._index + 1
         return value
