@@ -72,7 +72,16 @@ class Bag:
         """
         TODO: Write this implementation
         """
-        pass
+        if self.size() != second_bag.size():
+            return False
+        if self.size() == 0 and second_bag.size() == 0:
+            return True
+
+        for item in self._da:
+            if self.count(item) != second_bag.count(item):
+                return False
+            return True
+
     def __iter__(self):
         """
         TODO: Write this implementation
@@ -85,6 +94,7 @@ class Bag:
         """
         try:
             value = self._da[self._index]
+        # except self._index < 0 or self._index >= self.size():
         except index < 0 or index >= self.size():
             raise DynamicArrayException
 
