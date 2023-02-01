@@ -275,7 +275,15 @@ class DynamicArray:
         """
         TODO: Write this implementation
         """
-        pass
+        new_arr = DynamicArray()
+        index = 0
+        while index != self.length():
+            value = self.get_at_index(index)
+            mapped_val = filter_func(value)
+            if mapped_val is True:
+                new_arr.append(self.get_at_index(index))
+            index += 1
+        return new_arr
 
     def reduce(self, reduce_func, initializer=None) -> object:
         """
