@@ -45,11 +45,15 @@ class Bag:
         TODO: Write this implementation
         """
         index = 0
+        remove_index = None
+        # finds index to remove
         for item in self._da:
             if item == value:
-                self._da.remove_at_index(index)
-                return True
+                remove_index = index
             index += 1
+        if remove_index is not None:
+            self._da.remove_at_index(remove_index)
+            return True
         return False
 
     def count(self, value: object) -> int:
