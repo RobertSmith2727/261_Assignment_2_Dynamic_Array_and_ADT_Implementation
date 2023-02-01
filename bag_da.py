@@ -77,9 +77,12 @@ class Bag:
         if self.size() == 0 and second_bag.size() == 0:
             return True
 
-        for item in self._da:
-            if self.count(item) != second_bag.count(item):
+        count = 0
+        while count != self.size():
+        # for item in self._da:
+            if self.count(self._da.get_at_index(count)) != second_bag.count(self._da.get_at_index(count)):
                 return False
+            count += 1
         return True
 
     def __iter__(self):
