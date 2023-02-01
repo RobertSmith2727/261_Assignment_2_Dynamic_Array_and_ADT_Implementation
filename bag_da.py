@@ -38,12 +38,20 @@ class Bag:
         """
         TODO: Write this implementation
         """
-        pass
+        self._da.append(value)
+
     def remove(self, value: object) -> bool:
         """
         TODO: Write this implementation
         """
-        pass
+        index = 0
+        for item in self._da:
+            if item == value:
+                self._da.remove_at_index(index)
+                return True
+            index += 1
+        return False
+
     def count(self, value: object) -> int:
         """
         TODO: Write this implementation
@@ -63,12 +71,21 @@ class Bag:
         """
         TODO: Write this implementation
         """
-        pass
+        self._index = 0
+        return self
     def __next__(self):
         """
         TODO: Write this implementation
         """
-        pass
+        try:
+            value = self._da[self._index]
+        except index < 0 or index >= self.size():
+            raise DynamicArrayException
+
+        self._index = self._index + 1
+        return value
+
+
 # ------------------- BASIC TESTING -----------------------------------------
 if __name__ == "__main__":
     print("\n# add example 1")

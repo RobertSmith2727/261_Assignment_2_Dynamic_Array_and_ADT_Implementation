@@ -2,7 +2,7 @@
 # OSU Email: Smithro8@oregonstate.edu
 # Course:       CS261 - Data Structures
 # Assignment: 2
-# Due Date:
+# Due Date: 02/06/2023
 # Description:
 
 from static_array import StaticArray
@@ -135,7 +135,7 @@ class DynamicArray:
         """
         #
         # if new_capacity <= 0 or new_capacity <= DynamicArray.get_capacity(self):
-        if new_capacity <= 0 or new_capacity < self._size:
+        if new_capacity <= 0 or new_capacity < self.length():
             return
         else:
             self._capacity = new_capacity
