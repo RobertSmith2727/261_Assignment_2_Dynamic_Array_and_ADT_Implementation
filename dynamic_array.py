@@ -312,7 +312,74 @@ def find_mode(arr: DynamicArray) -> (DynamicArray, int):
     """
     TODO: Write this implementation
     """
-    pass
+
+    save_index_1 = ""
+    save_index_2 = ""
+    save_index_3 = ""
+    save_index_4 = ""
+    index_count = 0
+    frequency = 0
+    new_arr = DynamicArray()
+
+    counter = 1
+    greatest_count = 0
+    iteration_count = 0
+
+    if arr.length() == 1:
+        new_arr.append(arr[0])
+        return new_arr, 1
+
+    max_index = arr.length() - 1
+    index = 0
+    while index != max_index:
+        if arr[index] == arr[index + 1]:
+            counter += 1
+        # if occurrence end reset values
+        if arr[index] != arr[index + 1]:
+            counter = 1
+        if counter >= greatest_count:
+            greatest_count = counter
+        index += 1
+
+    if greatest_count == 1:
+        for item in arr:
+            new_arr.append(item)
+        return new_arr, greatest_count
+    counter = 1
+    max_index = arr.length() - 1
+    index = 0
+    while index != max_index:
+        if arr[index] == arr[index + 1]:
+            counter += 1
+        # if occurrence end reset values
+        if arr[index] != arr[index + 1]:
+            counter = 1
+        if counter == greatest_count:
+            new_arr.append(arr[index])
+        index += 1
+    return new_arr, greatest_count
+
+    # max_index = arr.length() - 1
+    # index = 0
+    # while index != max_index:
+    #     if arr[index] == arr[index + 1]:
+    #         counter += 1
+    #         new_arr.append(arr[index])
+    #     # if occurrence end reset values
+    #     if arr[index] != arr[index + 1]:
+    #         counter = 1
+    #     if counter >= greatest_count:
+    #         greatest_count = counter
+    #         if save_index_1 == "":
+    #             save_index_1 = index
+    #         if save_index_2 == "":
+    #             save_index_2 = index
+    #         if save_index_3 == "":
+    #             save_index_3 = index
+    #         if save_index_4 == "":
+    #             save_index_4 = index
+    #     index += 1
+    # return new_arr, greatest_count
 
 
 # ------------------- BASIC TESTING -----------------------------------------
