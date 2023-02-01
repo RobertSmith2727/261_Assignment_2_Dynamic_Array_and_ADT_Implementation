@@ -275,6 +275,7 @@ class DynamicArray:
         """
         TODO: Write this implementation
         """
+
         new_arr = DynamicArray()
         index = 0
         while index != self.length():
