@@ -218,10 +218,6 @@ class DynamicArray:
                 self.set_at_index(da_index, None)
         self._size -= 1
 
-
-
-
-
     def slice(self, start_index: int, size: int) -> "DynamicArray":
         """
         TODO: Write this implementation
@@ -256,17 +252,24 @@ class DynamicArray:
         """
         TODO: Write this implementation
         """
+
         index = 0
         while index != second_da.length():
             self.append(second_da.get_at_index(index))
             index += 1
 
-
     def map(self, map_func) -> "DynamicArray":
         """
         TODO: Write this implementation
         """
-        pass
+        new_arr = DynamicArray()
+        index = 0
+        while index != self.length():
+            value = self.get_at_index(index)
+            mapped_val = map_func(value)
+            new_arr.append(mapped_val)
+            index += 1
+        return new_arr
 
     def filter(self, filter_func) -> "DynamicArray":
         """
