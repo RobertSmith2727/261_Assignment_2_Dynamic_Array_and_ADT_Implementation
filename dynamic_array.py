@@ -312,39 +312,36 @@ def find_mode(arr: DynamicArray) -> (DynamicArray, int):
     """
     TODO: Write this implementation
     """
-
-    save_index_1 = ""
-    save_index_2 = ""
-    save_index_3 = ""
-    save_index_4 = ""
-    index_count = 0
-    frequency = 0
     new_arr = DynamicArray()
 
-    counter = 1
-    greatest_count = 0
-    iteration_count = 0
-
+    # if arr is one item
     if arr.length() == 1:
         new_arr.append(arr[0])
         return new_arr, 1
 
+    # loop counts the highest frequency
     max_index = arr.length() - 1
     index = 0
+    counter = 1
+    frequency = 0
     while index != max_index:
         if arr[index] == arr[index + 1]:
             counter += 1
-        # if occurrence end reset values
+        # if occurrence ends, reset counter
         if arr[index] != arr[index + 1]:
             counter = 1
-        if counter >= greatest_count:
-            greatest_count = counter
+        # sets the highest frequency
+        if counter >= frequency:
+            frequency = counter
         index += 1
 
-    if greatest_count == 1:
+    # if one occurence of items
+    if frequency == 1:
         for item in arr:
             new_arr.append(item)
-        return new_arr, greatest_count
+        return new_arr, frequency
+
+    # loop appends highest frequency numbers
     counter = 1
     max_index = arr.length() - 1
     index = 0
@@ -354,33 +351,10 @@ def find_mode(arr: DynamicArray) -> (DynamicArray, int):
         # if occurrence end reset values
         if arr[index] != arr[index + 1]:
             counter = 1
-        if counter == greatest_count:
+        if counter == frequency:
             new_arr.append(arr[index])
         index += 1
-    return new_arr, greatest_count
-
-    # max_index = arr.length() - 1
-    # index = 0
-    # while index != max_index:
-    #     if arr[index] == arr[index + 1]:
-    #         counter += 1
-    #         new_arr.append(arr[index])
-    #     # if occurrence end reset values
-    #     if arr[index] != arr[index + 1]:
-    #         counter = 1
-    #     if counter >= greatest_count:
-    #         greatest_count = counter
-    #         if save_index_1 == "":
-    #             save_index_1 = index
-    #         if save_index_2 == "":
-    #             save_index_2 = index
-    #         if save_index_3 == "":
-    #             save_index_3 = index
-    #         if save_index_4 == "":
-    #             save_index_4 = index
-    #     index += 1
-    # return new_arr, greatest_count
-
+    return new_arr, frequency
 
 # ------------------- BASIC TESTING -----------------------------------------
 if __name__ == "__main__":
