@@ -56,12 +56,18 @@ class Bag:
         """
         TODO: Write this implementation
         """
-        pass
+        count = 0
+        for item in self._da:
+            if item == value:
+                count += 1
+        return count
+
     def clear(self) -> None:
         """
         TODO: Write this implementation
         """
-        pass
+        self._da = DynamicArray()
+
     def equal(self, second_bag: "Bag") -> bool:
         """
         TODO: Write this implementation
