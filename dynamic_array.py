@@ -280,7 +280,7 @@ class DynamicArray:
         index = 0
         while index != self.length():
             value = self.get_at_index(index)
-            mapped_val = filter_func(value)
+            mapped_val = filter_func(value)  # TODO
             if mapped_val is True:
                 new_arr.append(self.get_at_index(index))
             index += 1
@@ -290,7 +290,22 @@ class DynamicArray:
         """
         TODO: Write this implementation
         """
-        pass
+
+        if self.length() == 0:
+            return initializer
+
+        if initializer is None:
+            initializer = self.get_at_index(0)
+            index = 1
+        else:
+            index = 0
+
+        while index != self.length():
+            value = self.get_at_index(index)
+            mapped_val = reduce_func(initializer, value)  # TODO
+            initializer = mapped_val
+            index += 1
+        return initializer
 
 
 def find_mode(arr: DynamicArray) -> (DynamicArray, int):
