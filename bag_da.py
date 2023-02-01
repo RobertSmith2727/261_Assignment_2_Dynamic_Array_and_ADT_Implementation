@@ -80,7 +80,7 @@ class Bag:
         for item in self._da:
             if self.count(item) != second_bag.count(item):
                 return False
-            return True
+        return True
 
     def __iter__(self):
         """
