@@ -256,7 +256,11 @@ class DynamicArray:
         """
         TODO: Write this implementation
         """
-        pass
+        index = 0
+        while index != second_da.length():
+            self.append(second_da.get_at_index(index))
+            index += 1
+
 
     def map(self, map_func) -> "DynamicArray":
         """
