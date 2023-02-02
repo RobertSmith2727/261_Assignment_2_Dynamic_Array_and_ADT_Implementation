@@ -2,7 +2,7 @@
 # OSU Email: Smithro8@oregonstate.edu
 # Course:       CS261 - Data Structures
 # Assignment: 2
-# Due Date:
+# Due Date: 02/06/2023
 # Description:
 
 from dynamic_array import *
@@ -102,7 +102,6 @@ class Bag:
         try:
             value = self._da[self._index]
         except DynamicArrayException:
-        # except index < 0 or index >= self.size():
             raise StopIteration
 
         self._index = self._index + 1

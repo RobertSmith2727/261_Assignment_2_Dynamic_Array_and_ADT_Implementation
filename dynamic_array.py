@@ -3,7 +3,8 @@
 # Course:       CS261 - Data Structures
 # Assignment: 2
 # Due Date: 02/06/2023
-# Description:
+# Description: A dynamic array data structure that has a lot of methods to act similar to
+#              python list and features associated with python lists.
 
 from static_array import StaticArray
 
@@ -131,23 +132,25 @@ class DynamicArray:
 
     def resize(self, new_capacity: int) -> None:
         """
-        TODO: Write this implementation
+        Changes the capacity of the dynamic array
+        It doesn't change value or order of objects
+        It only accepts positive numbers bigger than the size of array
         """
-        #
-        # if new_capacity <= 0 or new_capacity <= DynamicArray.get_capacity(self):
+
         if new_capacity <= 0 or new_capacity < self.length():
             return
         else:
+            # sets capacity and keeps old list
             self._capacity = new_capacity
             temp_arr = self._data
             self._data = StaticArray(self._capacity)
-            for item in range(DynamicArray.length(self)):
+            for item in range(self.length()):
                 self._data[item] = temp_arr.get(item)
 
     def append(self, value: object) -> None:
         """
-        TODO: Write this implementation
-        TODO rewrite if time
+        Adds value to the end of the array
+        Doubles capacity when full
         """
         # if there is no room in da
         if self._data.get(self._data.length() - 1) is not None:
@@ -161,9 +164,9 @@ class DynamicArray:
 
     def insert_at_index(self, index: int, value: object) -> None:
         """
-        TODO: Write this implementation
+        Adds new value at specific index
+        Doubles capacity when full
         TODO test if it will insert at index 3 if index 2 and 3 are none
-        TODO rewrite if time
         """
 
         if index < 0 or index > self.length():
@@ -184,7 +187,9 @@ class DynamicArray:
 
     def remove_at_index(self, index: int) -> None:
         """
-        TODO: Write this implementation
+        Removes value at specific index
+        Reduces capacity if less than 1/4 space being used
+        Will not reduce below 10
         """
         # invalid index
         if index < 0 or index > self.length():
@@ -210,6 +215,7 @@ class DynamicArray:
         if self._size - 1 == index:
             self._size -= 1
             return
+
         # shifts vals to the right takes off end
         while da_index != self._size - 1:
             self.set_at_index(da_index, self.get_at_index(da_index + 1))
@@ -220,11 +226,10 @@ class DynamicArray:
 
     def slice(self, start_index: int, size: int) -> "DynamicArray":
         """
-        TODO: Write this implementation
+        Returns a new array that contains a 'slice' of the original array
         """
 
         new_arr = DynamicArray()
-
         # invalid index
         if start_index < 0 or start_index >= self.length():
             raise DynamicArrayException
@@ -242,6 +247,7 @@ class DynamicArray:
 
         index = start_index
         stop_index = start_index + size
+        # appends values to new arr
         while index != stop_index:
             value = self.get_at_index(index)
             new_arr.append(value)
@@ -250,7 +256,7 @@ class DynamicArray:
 
     def merge(self, second_da: "DynamicArray") -> None:
         """
-        TODO: Write this implementation
+        Merges two arrays into one array
         """
 
         index = 0
@@ -260,10 +266,11 @@ class DynamicArray:
 
     def map(self, map_func) -> "DynamicArray":
         """
-        TODO: Write this implementation
+        Returns new array with values of the function passed
         """
         new_arr = DynamicArray()
         index = 0
+        # gets val, applies func, appends
         while index != self.length():
             value = self.get_at_index(index)
             mapped_val = map_func(value)
@@ -273,47 +280,54 @@ class DynamicArray:
 
     def filter(self, filter_func) -> "DynamicArray":
         """
-        TODO: Write this implementation
+        Returns a filtered new array
+        Values are filtered by a passed function
         """
 
         new_arr = DynamicArray()
         index = 0
+        # gets value, changes val to T or F, appends if true
         while index != self.length():
             value = self.get_at_index(index)
-            mapped_val = filter_func(value)  # TODO
-            if mapped_val is True:
+            filtered_val = filter_func(value)
+            if filtered_val is True:
                 new_arr.append(self.get_at_index(index))
             index += 1
         return new_arr
 
     def reduce(self, reduce_func, initializer=None) -> object:
         """
-        TODO: Write this implementation
+        Returns a reduced object
+        The object value is derived from a passed function
         """
-
+        # if no items
         if self.length() == 0:
             return initializer
 
+        # sets initializer if not passed
         if initializer is None:
             initializer = self.get_at_index(0)
             index = 1
         else:
             index = 0
 
+        # gets value, reduces and adjusts initializer
         while index != self.length():
             value = self.get_at_index(index)
-            mapped_val = reduce_func(initializer, value)  # TODO
-            initializer = mapped_val
+            reduced_val = reduce_func(initializer, value)
+            initializer = reduced_val
             index += 1
         return initializer
 
 
 def find_mode(arr: DynamicArray) -> (DynamicArray, int):
     """
-    TODO: Write this implementation
+    Returns a new array with the most occurring objects
+    Also returns frequency of objects
+    Array must be ordered
     """
-    new_arr = DynamicArray()
 
+    new_arr = DynamicArray()
     # if arr is one item
     if arr.length() == 1:
         new_arr.append(arr[0])
