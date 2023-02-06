@@ -3,9 +3,12 @@
 # Course:       CS261 - Data Structures
 # Assignment: 2
 # Due Date: 02/06/2023
-# Description:
+# Description: Creates a Bag ADT, includes methods to add, remove, count,
+#              check if equal and clear the bag
 
 from dynamic_array import *
+
+
 class Bag:
     def __init__(self, start_bag=None):
         """
@@ -18,6 +21,7 @@ class Bag:
         if start_bag is not None:
             for value in start_bag:
                 self.add(value)
+
     def __str__(self) -> str:
         """
         Return content of stack in human-readable form
@@ -27,22 +31,26 @@ class Bag:
         out += ', '.join([str(self._da.get_at_index(_))
                           for _ in range(self._da.length())])
         return out + ']'
+
     def size(self) -> int:
         """
         Return total number of items currently in the bag
         DO NOT CHANGE THIS METHOD IN ANY WAY
         """
         return self._da.length()
+
     # -----------------------------------------------------------------------
     def add(self, value: object) -> None:
         """
-        TODO: Write this implementation
+        Adds value to the bag
         """
         self._da.append(value)
 
     def remove(self, value: object) -> bool:
         """
-        TODO: Write this implementation
+        Removes value from bag
+        Returns True if it removes value
+        Otherwise returns False
         """
         index = 0
         remove_index = None
@@ -51,6 +59,7 @@ class Bag:
             if item == value:
                 remove_index = index
             index += 1
+        # checks if val found and removes
         if remove_index is not None:
             self._da.remove_at_index(remove_index)
             return True
@@ -58,7 +67,7 @@ class Bag:
 
     def count(self, value: object) -> int:
         """
-        TODO: Write this implementation
+        Returns count of value passed
         """
         count = 0
         for item in self._da:
@@ -68,13 +77,14 @@ class Bag:
 
     def clear(self) -> None:
         """
-        TODO: Write this implementation
+        Clears the array
         """
         self._da = DynamicArray()
 
     def equal(self, second_bag: "Bag") -> bool:
         """
-        TODO: Write this implementation
+        Returns True if two bags have the same values
+        Otherwise returns False
         """
         if self.size() != second_bag.size():
             return False
@@ -83,21 +93,22 @@ class Bag:
 
         count = 0
         while count != self.size():
-        # for item in self._da:
-            if self.count(self._da.get_at_index(count)) != second_bag.count(self._da.get_at_index(count)):
+            if self.count(self._da.get_at_index(count)) != \
+                    second_bag.count(self._da.get_at_index(count)):
                 return False
             count += 1
         return True
 
     def __iter__(self):
         """
-        TODO: Write this implementation
+        Creates iterator for loop
         """
         self._index = 0
         return self
+
     def __next__(self):
         """
-        TODO: Write this implementation
+        Gets the next value and advances iterator
         """
         try:
             value = self._da[self._index]

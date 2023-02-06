@@ -166,7 +166,6 @@ class DynamicArray:
         """
         Adds new value at specific index
         Doubles capacity when full
-        TODO test if it will insert at index 3 if index 2 and 3 are none
         """
 
         if index < 0 or index > self.length():
@@ -349,13 +348,13 @@ def find_mode(arr: DynamicArray) -> (DynamicArray, int):
             frequency = counter
         index += 1
 
-    # if one occurence of items
+    # if one occurrence of items
     if frequency == 1:
         for item in arr:
             new_arr.append(item)
         return new_arr, frequency
 
-    # loop appends highest frequency numbers
+    # appends highest frequency numbers
     counter = 1
     max_index = arr.length() - 1
     index = 0
